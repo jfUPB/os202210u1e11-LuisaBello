@@ -26,11 +26,22 @@ Event *SearchEvent(EventList *this, char *name)
 
 void AddEvent(EventList *this, Event *event)
 {
-
+    if (this->isEmpty !=NULL){
+        this->last->next=malloc(sizeof(*event));
+    }
+    
 }
 
 void RemoveEvent(EventList *this, char *name)
 {
+      if (this->isEmpty!=NULL){
+          for (int8_t i=0; sizeof(name); i++){
+              if(*name.equals(this[i]){
+                  free(*name);
+              }else
+
+          }
+      }
 }
 
 void ListEvents(EventList *this)

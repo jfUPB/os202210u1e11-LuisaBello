@@ -4,7 +4,8 @@
 
 Event *CreateEvent(char *name)
 {
-    Event *event = NULL;
+    Event *event = malloc(sizeof(name));
+    event->next=NULL;
     return event;
 }
 

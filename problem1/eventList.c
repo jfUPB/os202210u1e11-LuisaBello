@@ -5,8 +5,10 @@
 
 EventList *CreateEventList(void)
 {
-    EventList *eventList = NULL;
-
+    EventList *eventList =malloc(sizeof(EventList));
+    eventList->head=NULL;
+    eventList->last=NULL;
+    eventList->isEmpty=0;
     return eventList;
 }
 
@@ -26,26 +28,62 @@ Event *SearchEvent(EventList *this, char *name)
 
 void AddEvent(EventList *this, Event *event)
 {
-    if (this->isEmpty !=NULL){
-        this->last->next=malloc(sizeof(*event));
+    if (this->isEmpty !=0){
+        this->last->next=event;
+        this->last=event;
+
+    }else{
+        this->head=event;
+        this->last=event;
+        this->isEmpty=1;
     }
     
 }
 
 void RemoveEvent(EventList *this, char *name)
 {
-      if (this->isEmpty!=NULL){
-          for (int8_t i=0; sizeof(name); i++){
-              if(*name.equals(this[i]){
-                  free(*name);
-              }else
 
+    Event *recorrido=this->head;
+    if (this->isEmpty!=0){
+
+        while (recorrido!=NULL){
+        if( *(this->head->eventName+2) == *(name+2)){
+            this->head= this->head->next; 
+            break;
           }
+        else if( *(recorrido->next->eventName+2) == *(name+2)){
+            recorrido->next= recorrido->next->next; 
+            break;
+            
+        } 
+        recorrido=recorrido->next;
       }
+        if(this->head==NULL){
+            this->isEmpty=0;
+        }
+    }else
+    {
+        return;
+    }
 }
 
 void ListEvents(EventList *this)
 {
     // imprime esto si la lista está vacía
-    printf("empty\n");
+    
+    Event *recorrido=this->head;
+    //int8_t contador = 0;
+
+    if(this->isEmpty!=0){
+
+        while(recorrido!=NULL){
+        
+            printf("%s\n",recorrido->eventName);
+            recorrido=recorrido->next;
+        }
+    }else{
+        printf("empty\n");
+    }
+    
+    
 }

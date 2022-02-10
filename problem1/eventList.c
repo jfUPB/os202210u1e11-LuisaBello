@@ -48,17 +48,14 @@ void AddEvent(EventList *this, Event *event)
 
     if (this->isEmpty != 0)
     {
-
         while (recorrido != NULL)
         {
             if (*(recorrido->eventName + 2) == *(event->eventName + 2) && *(recorrido->eventName + 3) == *(event->eventName + 3))
             {
                 return;
             }
-
             recorrido = recorrido->next;
         }
-
         this->last->next = event;
         this->last = event;
     }
@@ -72,33 +69,54 @@ void AddEvent(EventList *this, Event *event)
 
 void RemoveEvent(EventList *this, char *name)
 {
-
     Event *recorrido = this->head;
+    Event *new_recorrido = this->head;
+    int8_t contador = 1;
     if (this->isEmpty != 0)
     {
+        Event bandera;
+        Event *recorrido = this->head;
+        if (this->isEmpty != 0)
+        {
 
-        while (recorrido != NULL)
-        {
-            if (*(this->head->eventName + 2) == *(name + 2))
+            do
             {
-                this->head = this->head->next;
-                break;
-            }
-            else if (*(recorrido->next->eventName + 2) == *(name + 2))
+                if (*(this->head->eventName + 2) == *(name + 2))
+                {
+                    this->head = this->head->next;
+                    break;
+                }
+                else if (*(recorrido->next->eventName + 2) == *(name + 2))
+                {
+                    recorrido->next = recorrido->next->next;
+                    break;
+                }
+
+                recorrido = recorrido->next;
+
+                if (recorrido == NULL)
+                {
+                    while (new_recorrido != NULL)
+                    {
+                        if (!(*(new_recorrido->eventName + 2) == *(name + 2) && *(new_recorrido->eventName + 3) == *(name + 3)))
+                        {
+                            return;
+                        }
+                        new_recorrido = new_recorrido->next;
+                    }
+                }
+
+            } while (recorrido != NULL);
+
+            if (this->head == NULL)
             {
-                recorrido->next = recorrido->next->next;
-                break;
+                this->isEmpty = 0;
             }
-            recorrido = recorrido->next;
         }
-        if (this->head == NULL)
+        else
         {
-            this->isEmpty = 0;
+            return;
         }
-    }
-    else
-    {
-        return;
     }
 }
 

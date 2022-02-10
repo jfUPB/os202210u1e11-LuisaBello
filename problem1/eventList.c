@@ -76,6 +76,7 @@ void RemoveEvent(EventList *this, char *name)
     {
         Event bandera;
         Event *recorrido = this->head;
+        int8_t contador = 0;
         if (this->isEmpty != 0)
         {
 
@@ -83,28 +84,41 @@ void RemoveEvent(EventList *this, char *name)
             {
                 if (*(this->head->eventName + 2) == *(name + 2))
                 {
+                    DestroyEvent(this->head);
                     this->head = this->head->next;
                     break;
                 }
                 else if (*(recorrido->next->eventName + 2) == *(name + 2))
                 {
+                    DestroyEvent(recorrido->next);
                     recorrido->next = recorrido->next->next;
                     break;
                 }
+                else
+                {
+                    contador = contador + 1;
+                    if (contador == 7)
+                    {
+
+                        return;
+                    }
+                }
 
                 recorrido = recorrido->next;
-
-                if (recorrido == NULL)
+                contador = contador + 1;
+               
+                /*if (recorrido == NULL)
                 {
-                    while (new_recorrido != NULL)
+                    while (contador != 0)
                     {
                         if (!(*(new_recorrido->eventName + 2) == *(name + 2) && *(new_recorrido->eventName + 3) == *(name + 3)))
                         {
                             return;
                         }
                         new_recorrido = new_recorrido->next;
+                        contador = contador - 1;
                     }
-                }
+                }*/
 
             } while (recorrido != NULL);
 

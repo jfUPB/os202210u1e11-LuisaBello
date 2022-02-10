@@ -1,1 +1,0 @@
-../tester/run-tests.sh: línea 27:  9610 Violación de segmento  (`core' generado) ./main < tests/13.in
